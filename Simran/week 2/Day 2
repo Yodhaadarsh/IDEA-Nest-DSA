@@ -1,0 +1,26 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        // This will store the ultimate best sum we find
+        int maxSum = nums[0]; 
+        
+        // This tracks the running total as we walk through the array
+        int currentSum = 0;   
+        
+        for (int i = 0; i < nums.length; i++) {
+            // Keep adding the current number to our running total
+            currentSum += nums[i]; 
+            
+            // If our running total beats the best sum so far, update it
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+            }
+            
+            // Kadane's Magic: If the total drops below 0, it's useless. 
+            // So we reset it back to 0 and start fresh from the next number.
+            if (currentSum < 0) {
+                currentSum = 0;
+            }
+        }
+        return maxSum;
+    }
+}
